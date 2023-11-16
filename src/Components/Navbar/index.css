@@ -1,0 +1,45 @@
+.nav-logo {
+  width: 50px;
+}
+@media screen and (min-width: 992px) {
+  .nav-logo {
+    width: 80px;
+  }
+}
+.active {
+  color: orangered !important;
+}
+@media screen and (min-width: 992px) {
+  .active {
+    border-bottom: 2px solid black !important;
+  }
+}
+.navbar-text {
+  font-style: italic;
+  font-weight: bold;
+}
+.form-input {
+  outline: none;
+  border: none;
+  width: 100%;
+}
+.sm-search-box {
+  width: 80% !important;
+}
+.nav-item {
+  font-weight: bold;
+}
+.popup-content {
+  width: 95% !important;
+  height: 50vh;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .popup-content {
+    width: 50% !important;
+  }
+}

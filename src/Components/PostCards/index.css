@@ -1,0 +1,11 @@
+.avatar {
+  width: 80px;
+}
+.post-control-btns {
+  font-size: 22px;
+}
+@media screen and (min-width: 992px) {
+  .post-control-btns {
+    font-size: 30px;
+  }
+}
