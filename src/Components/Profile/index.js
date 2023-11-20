@@ -17,9 +17,6 @@ const Profile = (props) => {
     const fetchApi = async () => {
       try {
         setFetchState(InistalFetchingStatus.INPROGRESS);
-        const { match } = props;
-        const { params } = match;
-        const { id } = params;
         const path = "insta-share/my-profile";
         const apiData = await CallGetApi(path);
         const eachData = apiData.profile;

@@ -43,9 +43,9 @@ const Login = (props) => {
 
   const token = Cookies.get("jwt_token");
 
-  // if (token !== undefined) {
-  //   return <Redirect to="/" />;
-  // }
+  if (token !== undefined) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="container">

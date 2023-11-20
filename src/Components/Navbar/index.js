@@ -4,6 +4,7 @@ import {
   NavLink,
   Link,
   withRouter,
+  useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
 import Context from "../../Context";
 
@@ -29,6 +30,8 @@ const Navbar = (props) => {
     const { history } = props;
     history.replace("/login");
   };
+
+  const pathlocation = useLocation();
 
   return (
     <>
@@ -57,15 +60,17 @@ const Navbar = (props) => {
             id="navItems"
           >
             <ul className="navbar-nav d-lg-flex align-items-lg-center">
-              <li className="d-none d-lg-block me-3">
-                <input
-                  type="search"
-                  placeholder="Search Caption"
-                  className="form-control"
-                  value={searchInputValue}
-                  onChange={onchangeSearch}
-                />
-              </li>
+              {pathlocation.pathname === "/" && (
+                <li className="d-none d-lg-block me-3">
+                  <input
+                    type="search"
+                    placeholder="Search Caption"
+                    className="form-control"
+                    value={searchInputValue}
+                    onChange={onchangeSearch}
+                  />
+                </li>
+              )}
               <li className="nav-item">
                 <NavLink
                   exact
@@ -82,15 +87,18 @@ const Navbar = (props) => {
                 </NavLink>
               </li>
 
-              <li className="nav-item nav-link d-lg-none">
-                <button
-                  type="button"
-                  className="btn btn-primary btn-border"
-                  onClick={toggleSearchBar}
-                >
-                  Search
-                </button>
-              </li>
+              {pathlocation.pathname === "/" && (
+                <li className="nav-item nav-link d-lg-none">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-border"
+                    onClick={toggleSearchBar}
+                  >
+                    Search
+                  </button>
+                </li>
+              )}
+
               <li className="nav-item nav-link">
                 <Popup
                   modal
@@ -101,7 +109,7 @@ const Navbar = (props) => {
                 >
                   {(close) => (
                     <div className="d-flex flex-column justify-content-center align-items-center">
-                      <h6>Please Confirm</h6>
+                      <h6>Please confirm</h6>
                       <div className="d-flex justify-content-around my-3">
                         <button
                           type="button"
@@ -126,6 +134,7 @@ const Navbar = (props) => {
           </div>
         </div>
       </nav>
+
       {showSearchBox && (
         <div className="d-flex justify-content-between align-items-center my-3 sm-search-box mx-auto d-lg-none">
           <input
