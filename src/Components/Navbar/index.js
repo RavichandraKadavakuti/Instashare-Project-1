@@ -33,6 +33,10 @@ const Navbar = (props) => {
 
   const pathlocation = useLocation();
 
+  if (pathlocation.pathname !== "/") {
+    onchangeSerachInputValue("");
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary  mb-3 mb-lg-5">
