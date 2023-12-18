@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { CallPostApi, InistalFetchingStatus } from "../Utilits";
 import Cookies from "js-cookie";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-
+import { useNavigate } from "react-router-dom";
 const Login = (props) => {
   const [fetchState, setFetchState] = useState(InistalFetchingStatus.INITIAL);
   const [userNameInput, setUserNameInput] = useState("");
   const [userPasswordInput, setUserPasswordInput] = useState("");
   const [apiErrorMsg, setApiErrorMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = Cookies.get("jwt_token");
+    if (token !== undefined) {
+      return navigate("/");
+    }
+  }, []);
 
   const submitForm = async (event) => {
     event.preventDefault();
@@ -20,9 +27,9 @@ const Login = (props) => {
       const ApiData = await CallPostApi(path, bodyData);
       const token = ApiData.jwt_token;
       Cookies.set("jwt_token", token, { expires: 30 });
-      const { history } = props;
-      history.replace("/");
+
       setFetchState(InistalFetchingStatus.SUCCESS);
+      navigate("/");
     } catch (error) {
       setFetchState(InistalFetchingStatus.FAILURE);
       setApiErrorMsg(error.message);
@@ -40,12 +47,6 @@ const Login = (props) => {
   const togglePassword = (event) => {
     setShowPassword(event.target.checked);
   };
-
-  const token = Cookies.get("jwt_token");
-
-  if (token !== undefined) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div className="container">

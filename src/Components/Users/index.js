@@ -10,17 +10,17 @@ import {
 import { useState, useEffect } from "react";
 import "./index.css";
 
-const Users = (props) => {
+import { useParams } from "react-router-dom";
+
+const Users = () => {
   const [fetchState, setFetchState] = useState(InistalFetchingStatus.INITIAL);
   const [userData, setUserData] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchApi = async () => {
       try {
         setFetchState(InistalFetchingStatus.INPROGRESS);
-        const { match } = props;
-        const { params } = match;
-        const { id } = params;
         const path = `insta-share/users/${id}`;
         const apiData = await CallGetApi(path);
         const eachData = apiData.user_details;

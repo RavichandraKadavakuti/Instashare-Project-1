@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { Link } from "react-router-dom";
 
+
+
 import {
   CallGetApi,
   FailureViewData,

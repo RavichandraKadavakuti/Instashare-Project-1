@@ -9,8 +9,6 @@ export const InistalFetchingStatus = {
   INPROGRESS: "InProgress",
 };
 
-const token = Cookies.get("jwt_token");
-
 export const CallPostApi = async (path, bodyData) => {
   try {
     const url = `https://apis.ccbp.in/${path}`;
@@ -34,6 +32,8 @@ export const CallPostApi = async (path, bodyData) => {
 };
 
 export const CallGetApi = async (path) => {
+  let token = Cookies.get("jwt_token");
+
   try {
     const url = `https://apis.ccbp.in/${path}`;
 
@@ -58,6 +58,8 @@ export const CallGetApi = async (path) => {
 };
 
 export const CallLikePostApi = async (path, bodyData) => {
+  let token = Cookies.get("jwt_token");
+
   try {
     const url = `https://apis.ccbp.in/${path}`;
 

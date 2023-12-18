@@ -1,21 +1,20 @@
 import React, { useState, useContext } from "react";
 import "./index.css";
-import {
-  NavLink,
-  Link,
-  withRouter,
-  useLocation,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import Context from "../../Context";
 
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Cookies from "js-cookie";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const { searchInputValue, onchangeSerachInputValue } = useContext(Context);
 
   const [showSearchBox, setShowSearchBox] = useState(false);
+
+  const pathlocation = useLocation();
+
+  const navigate = useNavigate();
 
   const toggleSearchBar = () => {
     setShowSearchBox(!showSearchBox);
@@ -27,11 +26,8 @@ const Navbar = (props) => {
 
   const onLogout = () => {
     Cookies.remove("jwt_token");
-    const { history } = props;
-    history.replace("/login");
+    navigate("/login");
   };
-
-  const pathlocation = useLocation();
 
   if (pathlocation.pathname !== "/") {
     onchangeSerachInputValue("");
@@ -77,16 +73,15 @@ const Navbar = (props) => {
               )}
               <li className="nav-item">
                 <NavLink
-                  exact
                   to="/"
                   className="nav-link"
-                  activeClassName="active"
+                  // activeClassName="active"
                 >
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink exact to="/profile" className="nav-link">
+                <NavLink to="/profile" className="nav-link">
                   Profile
                 </NavLink>
               </li>
@@ -154,4 +149,4 @@ const Navbar = (props) => {
   );
 };
 
-export default withRouter(Navbar);
+export default Navbar;
